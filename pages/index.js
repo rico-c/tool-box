@@ -7,7 +7,7 @@ import "antd/dist/antd.css";
 const { Search } = Input;
 
 export default class extends React.Component {
-  state = {
+  state = {    
     history: [],
     readme: false
   };
@@ -57,6 +57,12 @@ export default class extends React.Component {
             name="viewport"
             content="initial-scale=1.0, width=device-width"
           />
+          <meta
+            name="keywords"
+            content="百度网盘 网盘 搜盘 搜网盘 搜索 搜百度盘"
+          />
+          >
+          <meta name="description" content="百度网盘搜索引擎" />>
         </Head>
         <div className="home-wrapper">
           <div className="search-area">

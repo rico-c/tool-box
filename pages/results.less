@@ -1,0 +1,65 @@
+.results-wrapper {
+  position: relative;
+  .header{
+    position: sticky;
+    top: 0;
+  }
+  .main-area{
+    display: flex;
+    flex: 1;
+    margin-top: 15px;
+    .data-list{
+      padding-left: 140px;
+      width: 790px;
+      .filter-btn{
+
+      }
+      .result-list{
+        .res-item{
+          margin-bottom: 8px;
+          .icon{
+
+          }
+          .file-name{
+            .file:hover{
+              text-decoration: underline;
+            }
+            .file{
+              cursor: pointer;
+              color: #1a0dab;
+              font-size: 22px;
+              mark {
+                color: #dd4b39;
+                background-color: transparent;
+                padding: 0;
+              }
+            }
+            .up-time{
+              font-size: 14px;
+              float: right;
+            }
+          }
+          .file-size{
+            font-size: 14px;
+            color: #006621;
+          }
+          .file-subtree{
+            font-size: 14px;
+            color: #545454;
+            .sub-file{
+              .sub-size{
+                color: #959595;
+              }
+            }
+          }
+        }
+      }
+      .paganition{
+        margin: 20px 0 50px 0;
+      }
+    }
+    .ad-area{
+      padding: 0px 30px;
+    }
+  }
+}
