@@ -13,7 +13,6 @@ const host = "http://localhost:8080/api";
 class Results extends React.Component {
   static async getInitialProps({ query }) {
     const data = await Results.getData(query);
-    scrollTo(0, 0);
     return {
       ...query,
       ...data
@@ -40,6 +39,7 @@ class Results extends React.Component {
       query: { query: this.props.query, page: pageNumber },
       shallow: false
     });
+    scrollTo(0, 0);
   }
   changeSize(limit) {
     var size = "";
@@ -66,7 +66,6 @@ class Results extends React.Component {
     return size;
   }
   jumptoDetail(id) {
-    console.log(id);
     Router.push({
       pathname: "/detail",
       query: { id },
@@ -111,7 +110,7 @@ class Results extends React.Component {
                     <div className="file-subtree">
                       {item.res.filelist
                         ? item.res.filelist.map((el, subIndex) => {
-                            if (subIndex !== 0) {
+                            if (subIndex !== 0 && subIndex <= 4) {
                               return (
                                 <div
                                   className="sub-file"
@@ -121,6 +120,13 @@ class Results extends React.Component {
                                   <span className="sub-size">
                                     {this.changeSize(el.size)}
                                   </span>
+                                </div>
+                              );
+                            }
+                            else if (subIndex === 5) {
+                              return (
+                                <div className="more-file">
+                                  ...
                                 </div>
                               );
                             }

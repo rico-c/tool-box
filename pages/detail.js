@@ -1,10 +1,33 @@
 import React from "react";
 import Header from "../components/header/header";
 import Head from "next/head";
+import axios from "axios";
 
 import "./detail.less";
 
-export default class extends React.Component {
+const host = "http://localhost:8080/api";
+
+class Detail extends React.Component {
+  static async getInitialProps({ query }) {
+    const data = await Detail.getData(query);
+    return {
+      ...query,
+      ...data
+    };
+  }
+  static async getData(query) {
+    try {
+      const res = await axios.get(`${host}/getDetail`, {
+        params: {
+          id: query.id
+        }
+      });
+      console.log(res.data);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
   render() {
     return (
       <div>
@@ -23,3 +46,5 @@ export default class extends React.Component {
     );
   }
 }
+
+export default Detail;

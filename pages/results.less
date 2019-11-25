@@ -46,10 +46,19 @@
           .file-subtree{
             font-size: 14px;
             color: #545454;
+            display: -webkit-box;
+            -webkit-line-clamp:5;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
             .sub-file{
               .sub-size{
                 color: #959595;
               }
+            }
+            .more-file{
+              font-size:12px;
+              color: #959595;
             }
           }
         }

@@ -24,7 +24,22 @@ router.get("/getList", async (req, res, next) => {
   catch(err) {
     console.log(err);
   }
-  
+});
+
+router.get("/getDetail", async (req, res, next) => {
+  try {
+    const id = req.query.id;
+    console.log(id);
+    const apiRes = await axios.get("https://www.dalipan.com/api/private", {
+      params: {
+        id: id
+      }
+    });
+    console.log(apiRes);
+    res.send(apiRes.data);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 module.exports = router;
