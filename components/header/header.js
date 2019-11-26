@@ -13,13 +13,18 @@ export default class extends React.Component {
   jumptoResult = value => {
     Router.push({ pathname: "/results", query: { query: value } });
   };
+  jumptoIndex = () => {
+    Router.push({ pathname: "/"});
+  };
   render() {
     return (
       <div className="header-bar">
         <span className="img">
-          <img src="/static/icon.png" />
+          <img src="/static/icon.png" onClick={() => this.jumptoIndex()} />
         </span>
-        <span className="title">搜网盘</span>
+        <span className="title" onClick={() => this.jumptoIndex()}>
+          搜网盘
+        </span>
         <div className="search-bar">
           <Search
             size="large"

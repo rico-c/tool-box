@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { notification, Pagination } from "antd";
 import Header from "../components/header/header";
+import Footer from "../components/footer/footer";
 import { withRouter } from "next/router";
 import axios from "axios";
 import Router from "next/router";
@@ -32,20 +33,20 @@ class Results extends React.Component {
       console.log(err);
     }
   }
-  onChange = (pageNumber) => {
-    console.log('Page: ', pageNumber);
+  onChange = pageNumber => {
+    console.log("Page: ", pageNumber);
     Router.push({
       pathname: "/results",
       query: { query: this.props.query, page: pageNumber },
       shallow: false
     });
     scrollTo(0, 0);
-  }
+  };
   changeSize(limit) {
     var size = "";
     if (limit < 0.1 * 1024) {
       //小于0.1KB，则转化成B
-      size = limit.toFixed(2) + "B";
+      size = "";
     } else if (limit < 0.1 * 1024 * 1024) {
       //小于0.1MB，则转化成KB
       size = (limit / 1024).toFixed(2) + "KB";
@@ -65,12 +66,13 @@ class Results extends React.Component {
     }
     return size;
   }
-  jumptoDetail(id) {
-    Router.push({
-      pathname: "/detail",
-      query: { id },
-      shallow: false
-    });
+  jumptoDetail(id, tree, size, update, filename) {
+    const url = `${
+      window.location.origin
+    }/detail?id=${id}&tree=${JSON.stringify(
+      tree
+    )}&size=${size}&update=${update}&filename=${filename}`;
+    window.open(url);
   }
   render() {
     return (
@@ -95,7 +97,15 @@ class Results extends React.Component {
                     <div className="file-name">
                       <span
                         className="file"
-                        onClick={() => this.jumptoDetail(item.res.id)}
+                        onClick={() =>
+                          this.jumptoDetail(
+                            item.res.id,
+                            item.res.filelist,
+                            item.res.size,
+                            item.res.updatetime,
+                            item.res.filename
+                          )
+                        }
                         dangerouslySetInnerHTML={{
                           __html: item.highs.filename[0]
                         }}
@@ -122,13 +132,8 @@ class Results extends React.Component {
                                   </span>
                                 </div>
                               );
-                            }
-                            else if (subIndex === 5) {
-                              return (
-                                <div className="more-file">
-                                  ...
-                                </div>
-                              );
+                            } else if (subIndex === 5) {
+                              return <div className="more-file">...</div>;
                             }
                           })
                         : ""}
@@ -147,6 +152,7 @@ class Results extends React.Component {
             </div>
             <div className="ad-area">广告区</div>
           </div>
+          <Footer></Footer>
         </div>
       </div>
     );
